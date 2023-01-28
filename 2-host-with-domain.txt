@@ -1,0 +1,49 @@
+sudo apt update
+sudo apt install nginx
+
+Create project folders in /var/www/projectname
+sudo touch /etc/nginx/sites-available/default
+
+server {
+       listen 80;
+       listen [::]:80;
+
+       server_name main;
+
+       root /var/www/html;
+       index index.html;
+
+       location / {
+               try_files $uri $uri/ =404;
+       }
+}
+server {
+       listen 80;
+       listen [::]:80;
+
+       server_name site1;
+
+       root /var/www/site1;
+       index index.html;
+
+       location / {
+               try_files $uri $uri/ =404;
+       }
+}
+
+To set domain name /etc/hosts
+then add this line 127.0.0.1 localhost site1 site2
+Then open any browser and hit site1/ or site2
+
+sudo service nginx restart
+
+
+
+
+
+
+
+
+
+
+

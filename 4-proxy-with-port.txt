@@ -1,0 +1,46 @@
+sudo apt update
+sudo apt install nginx
+
+create your project and get location like so (http://localhost:3000/)
+sudo touch /etc/nginx/sites-enabled/default
+
+server {
+       listen 80;
+       listen [::]:80;
+
+       server_name main;
+
+       root /var/www/html;
+       index index.html;
+
+       location / {
+               try_files $uri $uri/ =404;
+       }
+}
+server {
+       listen 81;
+       listen [::]:81;
+
+       server_name '';
+
+       root /var/www/html;
+       index index.html;
+
+       location / {
+               proxy_pass http://localhost:3000/
+       }
+}
+
+
+sudo service nginx restart
+
+
+
+
+
+
+
+
+
+
+
